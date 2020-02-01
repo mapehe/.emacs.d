@@ -163,4 +163,4 @@
 (global-set-key (kbd "M-<left>") 'back-frame)
 (global-set-key (kbd "M-<up>") 'new-make)
 (global-set-key (kbd "M-<down>") 'delete-frame)
-(global-set-key [(control x) (k)] 'kill-this-buffer)
+(global-set-key [(control x) (k)] '(lambda () (interactive) (kill-buffer (current-buffer))))
