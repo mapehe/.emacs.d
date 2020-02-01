@@ -5,6 +5,8 @@
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (global-linum-mode 1) ; always show line numbers
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq echo-keystrokes 0.1)
 (setq inhibit-startup-screen t)
 
 (require 'package)
@@ -164,5 +166,3 @@
 (global-set-key (kbd "M-<up>") 'new-make)
 (global-set-key (kbd "M-<down>") 'delete-frame)
 (global-set-key [(control x) (k)] '(lambda () (interactive) (kill-buffer (current-buffer))))
-
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
