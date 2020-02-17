@@ -34,8 +34,12 @@
 (global-set-key [(control x) (k)] '(lambda () (interactive) (kill-buffer (current-buffer))))
 
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-             ("melpa" . "https://melpa.org/packages/")))
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("melpa" .
+                          ;; "https://elpa.zilongshanren.com/melpa/"
+                          "https://melpa.org/packages/"
+                          )
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")))
 (package-initialize)
 
 ;; bootstrap use-package
@@ -67,7 +71,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
+    (counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
 
 (defun toggle-evilmode ()
   (interactive)
@@ -253,3 +257,14 @@
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp)
+
+(use-package counsel
+  :bind*
+  (("C-c p s s" . counsel-git-grep)
+   ("C-x C-f" . counsel-find-file))
+  :custom
+  (counsel-find-file-ignore-regexp "\\.DS_Store\\|.git"))
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
