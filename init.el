@@ -69,9 +69,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(counsel-find-file-ignore-regexp "\\.DS_Store\\|.git")
  '(package-selected-packages
    (quote
-    (counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
+    (ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
 
 (defun toggle-evilmode ()
   (interactive)
@@ -268,3 +269,12 @@
 (use-package counsel-projectile
   :config
   (counsel-projectile-mode))
+
+(use-package ace-window
+  :config
+  (setq aw-leading-char-style 'path)
+  (setq aw-keys '(?h ?t ?u ?e))
+  (setq aw-scope 'frame)
+  )
+
+(global-set-key (kbd "C-x o") 'ace-window)
