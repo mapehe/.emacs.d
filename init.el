@@ -148,6 +148,7 @@
   (use-package helm-projectile
     :ensure t
     :bind (("C-c p f" . helm-projectile-find-file)
+           ("C-c p s s" . helm-projectile-ack)
            ("C-c p p" . helm-projectile-switch-project)))
   :config
   (projectile-global-mode))
@@ -258,17 +259,6 @@
 
 ;; Add company-lsp backend for metals
 (use-package company-lsp)
-
-(use-package counsel
-  :bind*
-  (("C-c p s s" . counsel-git-grep)
-   ("C-x C-f" . counsel-find-file))
-  :custom
-  (counsel-find-file-ignore-regexp "\\.DS_Store\\|.git"))
-
-(use-package counsel-projectile
-  :config
-  (counsel-projectile-mode))
 
 (use-package ace-window
   :config
