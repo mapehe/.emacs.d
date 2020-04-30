@@ -9,6 +9,7 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (setq echo-keystrokes 0.1)
 (setq inhibit-startup-screen t)
+(setq-default word-wrap t)
 
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
