@@ -96,14 +96,6 @@
   :ensure t
   :bind (("C-c m" . magit-status)))
 
-(defun magit-section-highlight-less (section _)
-  (magit-section-case
-    ((untracked unstaged staged hunk file)
-     (magit-section-make-overlay (magit-section-start   section)
-                                 (magit-section-content section)
-                                 'magit-section-highlight)
-  t)))
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -111,8 +103,6 @@
  ;; If there is more than one, they won't work right.
  '(magit-diff-added ((t (:foreground "#149914" :background nil :inherit nil))))
  '(magit-diff-removed ((t (:foreground "#991414" :background nil :inherit nil)))))
-
-(add-hook 'magit-section-highlight-hook 'magit-section-highlight-less)
 
 (use-package helm
   :bind (("M-x" . helm-M-x)
