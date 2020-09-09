@@ -16,7 +16,6 @@
       mac-command-modifier 'meta
       mac-option-modifier 'none)
 
-
 (defun back-frame ()
   (interactive)
   (other-frame -1))
@@ -28,11 +27,6 @@
   (toggle-scroll-bar -1)
   )
 
-(global-set-key (kbd "M-<right>") 'other-frame)
-(global-set-key (kbd "M-<left>") 'back-frame)
-(global-set-key (kbd "M-<up>") 'new-make)
-(global-set-key (kbd "M-<down>") 'delete-frame)
-(global-set-key [(control x) (k)] '(lambda () (interactive) (kill-buffer (current-buffer))))
 
 (require 'package)
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -264,10 +258,10 @@
   :config
   (setq TeX-auto-save t))
 
-(use-package elpy
-  :ensure t
-  :init
-  (elpy-enable))
-
 (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
 (global-set-key (kbd "C-x o") 'ace-window)
+(global-set-key (kbd "M-<right>") 'other-frame)
+(global-set-key (kbd "M-<left>") 'back-frame)
+(global-set-key (kbd "M-<up>") 'new-make)
+(global-set-key (kbd "M-<down>") 'delete-frame)
+(global-set-key [(control x) (k)] '(lambda () (interactive) (kill-buffer (current-buffer))))
