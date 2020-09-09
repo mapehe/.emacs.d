@@ -73,7 +73,7 @@
  '(counsel-find-file-ignore-regexp "\\.DS_Store\\|.git")
  '(package-selected-packages
    (quote
-    (ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
+    (elpy auctex acutex ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
 
 (defun toggle-evilmode ()
   (interactive)
@@ -258,4 +258,16 @@
   (setq aw-scope 'frame)
   )
 
+(use-package auctex
+  :defer t
+  :ensure t
+  :config
+  (setq TeX-auto-save t))
+
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
+(add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
 (global-set-key (kbd "C-x o") 'ace-window)
