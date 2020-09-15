@@ -67,7 +67,7 @@
  '(counsel-find-file-ignore-regexp "\\.DS_Store\\|.git")
  '(package-selected-packages
    (quote
-    (elpy auctex acutex ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
+    (js2-mode prettier-js elpy auctex acutex ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
 
 (defun toggle-evilmode ()
   (interactive)
@@ -257,6 +257,36 @@
   :ensure t
   :config
   (setq TeX-auto-save t))
+
+(use-package js2-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-mode)))
+
+(use-package prettier-js
+  :after js2-mode
+  :defer t
+  :ensure t
+  :config
+  :init
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  :config
+  (setq prettier-js-args '("--trailing-comma" "all"
+                           "--bracket-spacing" "false"))
+
+  (defun enable-minor-mode (my-pair)
+    "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
+    (if (buffer-file-name)
+        (if (string-match (car my-pair) buffer-file-name)
+            (funcall (cdr my-pair)))))
+  (add-hook 'web-mode-hook #'(lambda ()
+
+                               (enable-minor-mode
+                                '("\\.jsx?\\'" . prettier-js-mode)))))
+
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode)) ;; Override?
+(setq web-mode-content-types-alist
+  '(("jsx"  . "/some/react/path/.*\\.js[x]?\\'")))
 
 (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
 (global-set-key (kbd "C-x o") 'ace-window)
