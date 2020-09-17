@@ -270,6 +270,7 @@
   :init
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'tide-mode-hook 'prettier-js-mode)
   :config
   (setq prettier-js-args '("--trailing-comma" "all"
                            "--bracket-spacing" "false"))
@@ -282,7 +283,7 @@
   (add-hook 'web-mode-hook #'(lambda ()
 
                                (enable-minor-mode
-                                '("\\.jsx?\\'" . prettier-js-mode)))))
+                                '("\\.j\\|tsx?\\'" . prettier-js-mode)))))
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode)) ;; Override?
 (setq web-mode-content-types-alist
