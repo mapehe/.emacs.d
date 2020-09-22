@@ -67,7 +67,7 @@
  '(counsel-find-file-ignore-regexp "\\.DS_Store\\|.git")
  '(package-selected-packages
    (quote
-    (js2-mode prettier-js elpy auctex acutex ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
+    (scalariform js2-mode prettier-js elpy auctex acutex ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
 
 (defun toggle-evilmode ()
   (interactive)
@@ -112,6 +112,8 @@
 	      ("M-K" . helm-next-page)
 	      ("M-h" . helm-beginning-of-buffer)
 	      ("M-H" . helm-end-of-buffer))
+  :bind (:map helm-find-files-map
+	      ("TAB" . helm-execute-persistent-action))
   :config (progn
 	    (setq helm-buffers-fuzzy-matching t)
             (helm-mode 1)))
@@ -262,28 +264,9 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.jsx?\\'" . js2-mode)))
 
-(use-package prettier-js
-  :after js2-mode
+(use-package scalariform
   :defer t
-  :ensure t
-  :config
-  :init
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'tide-mode-hook 'prettier-js-mode)
-  :config
-  (setq prettier-js-args '("--trailing-comma" "all"
-                           "--bracket-spacing" "false"))
-
-  (defun enable-minor-mode (my-pair)
-    "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-    (if (buffer-file-name)
-        (if (string-match (car my-pair) buffer-file-name)
-            (funcall (cdr my-pair)))))
-  (add-hook 'web-mode-hook #'(lambda ()
-
-                               (enable-minor-mode
-                                '("\\.j\\|tsx?\\'" . prettier-js-mode)))))
+  :ensure t)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode)) ;; Override?
 (setq web-mode-content-types-alist
