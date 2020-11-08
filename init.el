@@ -66,8 +66,7 @@
  ;; If there is more than one, they won't work right.
  '(counsel-find-file-ignore-regexp "\\.DS_Store\\|.git")
  '(package-selected-packages
-   (quote
-    (scalariform js2-mode prettier-js elpy auctex acutex ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package))))
+   '(kotlin-mode scalariform js2-mode prettier-js elpy auctex acutex ace-window counsel-projectile counsel company-lsp yasnippet lsp-ui lsp-mode sbt-mode scala-mode atom-one-dark-theme helm-files company tide typescript-mode web-mode company-quickhelp avy helm-projectile projectile helm-ag helm-swoop helm-descbinds helm magit evil use-package)))
 
 (defun toggle-evilmode ()
   (interactive)
@@ -238,6 +237,7 @@
   :config (setq lsp-prefer-flymake nil))
 
 (use-package lsp-ui)
+(use-package kotlin-mode)
 
 ;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
 ;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
@@ -279,3 +279,7 @@
 (global-set-key (kbd "M-<up>") 'new-make)
 (global-set-key (kbd "M-<down>") 'delete-frame)
 (global-set-key [(control x) (k)] '(lambda () (interactive) (kill-buffer (current-buffer))))
+
+;; Keep 'Customize' stuff separated
+(setq custom-file (concat user-emacs-directory "custom.el"))
+(load custom-file 'noerror)
