@@ -283,3 +283,4 @@
 ;; Keep 'Customize' stuff separated
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
+(setq ispell-program-name "/usr/local/bin/ispell")
